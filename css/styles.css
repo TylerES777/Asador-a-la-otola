@@ -140,28 +140,22 @@ section { padding: var(--section-y) 0; }
   font-size: 1.05rem;
 }
 .brand-mark {
-  width: 64px; height: 44px;
+  width: 56px; height: 48px;
   display: grid; place-items: center;
   position: relative;
   flex: 0 0 auto;
   background-image: url('../assets/logo.png');
   background-repeat: no-repeat;
-  background-size: 260% auto;
-  background-position: 48% 30%;
-  /* PNG is black-spots-on-opaque-white. Invert flips to white-spots-on-black,
-     then mix-blend-mode: screen drops the black so only the white cow spots
-     remain visible over any backdrop. */
-  filter: invert(1);
-  mix-blend-mode: screen;
+  background-size: contain;
+  background-position: center;
 }
 .brand-mark::before { display: none; }
 .brand-mark svg { display: none; }
-/* On a light header, we want black spots — skip the invert and use multiply
-   so the white background drops out and only the black spots show. */
-.site-header.light:not(.scrolled) .brand-mark {
-  filter: none;
-  mix-blend-mode: multiply;
-}
+/* The badge is white-on-transparent — perfect for dark headers/footer as-is.
+   On a light header (rare), invert to render the badge in dark ink. */
+.site-header.light:not(.scrolled) .brand-mark { filter: invert(1); }
+/* Footer logo can be a touch larger */
+.site-footer .brand-mark { width: 64px; height: 56px; }
 .brand-text { display: flex; flex-direction: column; line-height: 1; }
 .brand-text small {
   font-family: var(--font-sans);
